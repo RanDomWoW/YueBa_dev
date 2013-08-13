@@ -1,0 +1,268 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context=".FullscreenActivity" >
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backg"
+    android:orientation="vertical" >
+
+<RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:background="@drawable/m_bar1">
+        
+    <TextView
+        android:id="@+id/scheduleTop"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:text="个人信息"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+     <ImageView
+        android:id="@+id/cancel"
+        style="@style/qa_bar_button_left"
+        android:src="@drawable/add_cancle"/>
+	 <ImageView
+	    android:id="@+id/save"
+        android:src="@drawable/add_save"
+        style="@style/qa_bar_button_right"
+        />
+   
+</RelativeLayout>
+<RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="70.0dip" >
+	 
+    <TextView
+        android:id="@+id/scheduleTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:gravity="top"
+        android:textSize="15dip"
+        android:text="唐文韬"
+        android:paddingTop="15dip"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/white_bg"/>
+     <ImageView
+        android:id="@+id/mlogo"
+        style="@style/qa_bar_button_right"
+        android:paddingRight="25dip"
+        android:src="@drawable/gauss0"/>
+   </RelativeLayout>
+     
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        >
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/white_bg">
+
+    <TextView
+        android:id="@+id/eventStartTime"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:hint="详细信息"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+    <TextView
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="15dip"
+        android:textColor="#000000"
+        android:text="用户名：  XXXX"
+       />
+       <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+        <TextView
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="15dip"
+        android:textColor="#000000"
+        android:text="性别：  男"
+       />
+      <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+       <TextView
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="15dip"
+        android:textColor="#000000"
+        android:text="兴趣爱好：  睡觉，看书"
+       />
+        <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+       <TextView
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="15dip"
+        android:textColor="#000000"
+        android:text="个性签名：  XXXXXXXX"
+       />
+         <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+       <TextView
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="15dip"
+        android:textColor="#000000"
+        android:text="被约人气：  109824 次"
+       />
+       
+    </LinearLayout>
+    
+    <!--  <LinearLayout 
+        android:layout_width="160dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/white_bg">
+    <TextView
+        android:id="@+id/eventEndTime"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:hint="终止时间"
+        
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+         />
+        <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+     <TextView
+        
+        android:id="@+id/eventEndTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="40sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+         />
+     </LinearLayout>-->
+</LinearLayout>
+    <!--
+  <com.pwp.borderText.BorderTextView 
+      android:id="@+id/scheduleDate"
+      android:gravity="center_vertical"
+	  android:layout_width="fill_parent"
+	  android:layout_height="43dp"
+	  android:textStyle="bold"
+	  android:layout_marginTop="5dp"
+	  android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:textColor="#000000"
+      android:clickable="true"
+      android:drawableRight="@drawable/schedule_type"
+      android:drawableLeft="@drawable/icon_note"
+      android:text="选择群组"
+      
+  />
+    -->
+    <!--  
+    <EditText
+        android:id="@+id/scheduleText"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:gravity="top"
+        android:hint="
+        	兴趣、爱好..."
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dip"
+        android:textColor="#000000" 
+        android:textSize="15sp"
+        android:background="@drawable/white_bg"/>
+
+	<LinearLayout
+		    android:layout_width="250dip"
+		    android:layout_height="100dip"
+		    android:layout_gravity="center_horizontal"
+		    android:orientation="horizontal" >
+
+        </LinearLayout>-->
+ 
+</LinearLayout>
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+
+
+</FrameLayout>

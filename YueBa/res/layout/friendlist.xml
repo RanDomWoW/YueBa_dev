@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+      <!-- logo banner -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:miles="http://schemas.android.com/apk/res/com.ckt.vas.miles"
+    android:id="@+id/mainView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backg" 
+    android:cacheColorHint="#00000000">
+    <RelativeLayout
+        android:id="@+id/qa_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="44.0dip"
+        android:background="@drawable/m_bar1" >
+
+      <!--   <ImageView
+            android:id="@+id/path_logo"
+            style="@style/qa_logo"
+            android:layout_centerHorizontal="true" /> -->
+
+        <ImageView
+            android:id="@+id/qa_bar_menu"
+            style="@style/qa_bar_button_left"
+            android:src="@drawable/menu2" />
+
+<!--          <ImageButton
+            android:id="@+id/qa_bar_friends"
+            style="@style/qa_bar_button_right"
+            android:src="@drawable/add2" /> --> 
+            
+            <TextView
+                android:text="朋友"
+                android:textSize="55px"
+                android:textColor="#FFFF"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+            />
+
+        <TextView
+            android:id="@+id/page_title_text"
+            style="@style/qa_bar_text"
+            android:layout_width="0.0dip"
+            android:layout_toLeftOf="@id/qa_bar_friends"
+            android:layout_toRightOf="@id/qa_bar_menu"
+            android:text="" />
+        
+<!--         
+<LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_below="@+id/qa_bar_menu"
+    >
+
+            <ImageView
+            android:id="@+id/searchbox"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:src="@drawable/searchbox" />
+            <ImageView
+                android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/searchbt"
+            android:src="@drawable/searchbt" />
+            </LinearLayout> -->
+    </RelativeLayout>
+<LinearLayout 
+	android:id="@+id/LinearLayout01" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:paddingTop="50.0dip"
+	>
+	
+    
+<ListView android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:id="@+id/ListView01"
+          android:background="@drawable/backg"
+          android:cacheColorHint="#00000000"
+
+          />
+</LinearLayout>
+
+</FrameLayout>

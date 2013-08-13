@@ -1,0 +1,244 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context=".FullscreenActivity" >
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backg"
+    android:orientation="vertical" >
+
+
+
+
+    <com.pwp.borderText.BorderTextView
+        android:id="@+id/scheduleTop"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/m_bar1"
+        android:clickable="true"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        
+        android:text="添加待办事项"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/scheduleTitle"
+        android:layout_width="fill_parent"
+        android:paddingTop="5dip"
+        android:layout_height="50dp"
+        android:gravity="top"
+        android:textSize="30sp"
+        android:hint="输入待办事项..."
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000" 
+        android:background="@drawable/white_bg"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/white_bg"
+        android:orientation="horizontal"
+        
+        android:paddingBottom="15dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="15dp" >
+
+        <kankan.wheel.widget.WheelView
+            android:id="@+id/hour"
+            android:layout_width="161dip"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_bg"
+            android:layout_marginRight="5dp" />
+
+        <kankan.wheel.widget.WheelView
+            android:id="@+id/mins"
+            android:layout_width="161dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/white_bg" />
+    </LinearLayout>
+
+    <TimePicker
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
+
+
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dp"
+
+        >
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:layout_width="160dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/white_bg">
+
+    <TextView
+        android:id="@+id/eventStartTime"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:hint="起始时间"
+       
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+        <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+    <TextView
+        
+        android:id="@+id/eventStartTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="40sp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="160dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/white_bg">
+    <TextView
+        android:id="@+id/eventEndTime"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:hint="终止时间"
+        
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+         />
+        <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_div"
+        />
+     <TextView
+        
+        android:id="@+id/eventEndTime_a"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="40sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+         />
+     </LinearLayout>
+</LinearLayout>
+    <!--
+  <com.pwp.borderText.BorderTextView 
+      android:id="@+id/scheduleDate"
+      android:gravity="center_vertical"
+	  android:layout_width="fill_parent"
+	  android:layout_height="43dp"
+	  android:textStyle="bold"
+	  android:layout_marginTop="5dp"
+	  android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:textColor="#000000"
+      android:clickable="true"
+      android:drawableRight="@drawable/schedule_type"
+      android:drawableLeft="@drawable/icon_note"
+      android:text="选择群组"
+      
+  />
+    -->
+
+    <EditText
+        android:id="@+id/scheduleText"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:gravity="top"
+        android:hint="
+        	简单描述一下您要添加的事件吧..."
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dip"
+        android:textColor="#000000" 
+        android:textSize="15sp"
+        android:background="@drawable/white_bg"/>
+
+	<LinearLayout
+		    android:layout_width="250dip"
+		    android:layout_height="100dip"
+		    android:layout_gravity="center_horizontal"
+		    android:orientation="horizontal" >
+
+    <ImageView
+        android:layout_width="125dip"
+        android:layout_height="50dip"
+        android:scaleType="fitXY"
+        android:id="@+id/save"
+        android:src="@drawable/add_save"
+        android:clickable="true"
+        android:gravity="center"/>
+    <ImageView
+        android:id="@+id/cancel"
+        android:scaleType="fitXY"
+        android:layout_width="125dip"
+        android:layout_height="50dip"
+        android:src="@drawable/add_cancle"
+        android:clickable="true"
+        android:gravity="center" />
+
+        </LinearLayout>
+ 
+</LinearLayout>
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+
+
+</FrameLayout>

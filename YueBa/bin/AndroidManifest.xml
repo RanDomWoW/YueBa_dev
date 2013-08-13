@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ckt.vas.miles"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application
+        android:icon="@drawable/yb"
+        android:label="@string/app_name"
+        android:launchMode="singleInstance"
+        android:theme="@style/Theme.Notitle" >
+       <activity
+            android:name="com.qihoo.yueba.ui.activities.PublicActivity"
+            android:label="@string/app_name" >
+           
+ <!--              <activity
+            android:name=".ui.activities.MainViewActivity"
+            android:label="@string/app_name" > -->
+            
+     <!--                  <activity
+            android:name=".ui.activities.Example"
+            android:label="@string/app_name" > -->
+            
+                          
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.qihoo.yueba.ui.activities.FriendListActivity"
+            android:label="@string/app_name" />
+                <activity
+            android:name="com.qihoo.yueba.ui.activities.TimeMergeActivity"
+            android:label="@string/app_name" />
+            <activity
+            android:name="com.qihoo.yueba.ui.activities.ScheduleView"
+            android:label="@string/app_name" >
+            
+           
+ <!--              <activity
+            android:name=".ui.activities.MainViewActivity"
+            android:label="@string/app_name" > -->
+            
+     <!--                  <activity
+            android:name=".ui.activities.Example"
+            android:label="@string/app_name" > -->
+        </activity>
+        
+        <activity
+            android:name="com.qihoo.yueba.ui.activities.AddEventActivity"
+            android:label="@string/app_name" /> 
+       <activity
+            android:name="com.qihoo.yueba.ui.activities.SettingActivity"
+            android:label="@string/app_name" /> 
+       
+        <receiver 
+            android:name = ".broadcastReciver">
+            <intent-filter android:priority="20">
+                <action android:name=".com.qihoo.psec.startactivity"/>
+            </intent-filter>
+        </receiver>
+
+     </application>
+
+</manifest>
