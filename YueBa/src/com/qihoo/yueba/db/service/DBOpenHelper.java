@@ -31,7 +31,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		Log.d("DB", "create db");
-		db.execSQL("create table t_ActivityMessage (id integer primary key autoincrement , isdate int, name varchar(20), title varchar(20) , stime Date , etime Date)");
+		db.execSQL("create table t_ActivityMessage (id integer primary key autoincrement , isdate int, name varchar(20), title varchar(20) , body varchar(40) ,stime Date , etime Date)");
 	}
 	
 	@Override

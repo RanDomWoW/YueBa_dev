@@ -1,5 +1,6 @@
 package com.qihoo.yueba.dto;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,9 +16,10 @@ public class ActivityMessage {
 	
 	private String startTime = null;
 	private String endTime = null;
+	private String body=null;
 	//empty used for loading header
 	private long realTime;
-	private Date realDate=new Date();
+	//private Date realDate=new Date();
 	private SimpleDateFormat sdf;
 	private int isDate;
 
@@ -33,11 +35,12 @@ public class ActivityMessage {
 	 * @param storeName
 	 * @param body
 	 */
-	public ActivityMessage(int isDate, String name, String title, String stime, String etime) {
+	public ActivityMessage(int isDate, String name, String title,String body, String stime, String etime) {
 		this.type = 1;
 		this.isDate = isDate;
 		this.name = name;
 		this.title = title;
+		this.body = body;
 		this.startTime = stime;
 		this.endTime = etime;
 	}
@@ -48,17 +51,36 @@ public class ActivityMessage {
 	public void setTitle(String t) {
 		 this.title = t;
 	}
-	
-	public String getStartTime() {
-
-			return this.startTime;
+	public String getBody() {
+		return body;
+	}
+	public void setBody(String b) {
+		 this.body = b;
+	}
+	public Date getStartTime() throws ParseException {
+		if(this.startTime!=null)
+			return sdf.parse(this.startTime);
+		
+		else return null;
 
 	}
 	public void setStartTime(String st) {
 		this.startTime = st;
+		sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		if(this.startTime!=null){
+		try {
+			this.realTime = sdf.parse(this.startTime).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 	}
-	public String getEndTime() {
-			return this.endTime;
+	public Date getEndTime() throws ParseException {
+		if(this.endTime!=null)
+			return sdf.parse(this.endTime);
+		
+		else return null;
 
 	}
 	public void setEndTime(String et) {

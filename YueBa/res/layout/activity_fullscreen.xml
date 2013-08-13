@@ -28,8 +28,8 @@
         android:clickable="true"
         android:gravity="center"
         android:layout_marginBottom="5dp"
-        
-        android:text="添加待办事项"
+        android:textSize="20sp"
+        android:text="添加您的计划"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
         android:layout_height="50dp"
         android:gravity="top"
         android:textSize="30sp"
-        android:hint="输入待办事项..."
+        android:hint="您的打算是..."
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="#000000" 
@@ -199,7 +199,7 @@
         android:layout_height="120dp"
         android:gravity="top"
         android:hint="
-        	简单描述一下您要添加的事件吧..."
+        	简单描述一下您这段时间的计划吧..."
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="15dip"

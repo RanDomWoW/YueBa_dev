@@ -11,6 +11,7 @@ import kankan.wheel.widget.OnWheelScrollListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import android.app.Activity;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,8 +86,14 @@ public class AddEventActivity extends Activity {
 				
 				//event_title.setText(p.getTitle());
 				
-				start_time.setText("已设置起始时间为:"+sdf.format(p.getStartTime()));
-				end_time.setText("已设置终止时间为:"+sdf.format(p.getEndTime()));
+				try {
+					start_time.setText("已设置起始时间为:"+sdf.format(p.getStartTime()));
+					end_time.setText("已设置终止时间为:"+sdf.format(p.getEndTime()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				//event_body.setText(p.getBody());
 				flag=1;
 		}
@@ -265,21 +272,35 @@ public class AddEventActivity extends Activity {
 		save_time.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//设置用户名称
 				p.setName("RanDom");
+				if(event_title.getText()!=null)
 				p.setTitle(event_title.getText().toString());
+				if(event_body.getText()!=null)
+				p.setBody(event_body.getText().toString());
 				sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					getter=c_year+"-"+c_month+"-"+c_date+" "+sdf.format(st);
 					p.setStartTime(getter);
 					getter=c_year+"-"+c_month+"-"+c_date+" "+sdf.format(et);
 					p.setEndTime(getter);
-
+					
+				try {
 				if(flag==1){
 					//Log.d("ab", dbService.findByTitle("RanDom").getBody());
-					dbService.update(p);
+
+						dbService.update(p);
+
 					flag=0;
 				}
 				else 
 					dbService.save(p);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Toast.makeText(getApplication(), "保存成功！", Toast.LENGTH_SHORT).show();
 				dbService.closeDB();
 				AddEventActivity.this.finish();

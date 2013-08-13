@@ -1,5 +1,6 @@
 package com.qihoo.yueba.db.service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DBService {
 	@SuppressWarnings("unused")
 	private Context context;
 	private DBOpenHelper dbHelper;
-
+	private List<ActivityMessage> LAM = new ArrayList<ActivityMessage>();
 	public DBService(Context context) {
 		dbHelper = new DBOpenHelper(context);
 	}
@@ -25,13 +26,15 @@ public class DBService {
 	 * 
 	 * @param p
 	 *            閿熺煫浼欐嫹瀹為敓鏂ゆ嫹
+	 * @throws ParseException 
+	 * @throws SQLException 
 	 */
-	public void save(ActivityMessage p) {
+	public void save(ActivityMessage p) throws SQLException, ParseException {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		//db.execSQL("create table t_ActivityMessage (id integer primary key autoincrement , name varchar(20), title varchar(20) , body varchar(50) , stime varchar(10) , etime varchar(10))");
 		
-		db.execSQL("insert into t_ActivityMessage (isdate, name , title , stime, etime) values (? , ? , ? , ? , ?)",
-				new Object[] { p.getIsDate(), p.getName(), p.getTitle(), 
+		db.execSQL("insert into t_ActivityMessage (isdate, name , title , body, stime, etime) values (? , ? , ?, ? , ? , ?)",
+				new Object[] { p.getIsDate(), p.getName(), p.getTitle(), p.getBody(),
 						p.getStartTime(), p.getEndTime() });
 	}
 
@@ -40,11 +43,13 @@ public class DBService {
 	 * 
 	 * @param p
 	 *            閿熺煫浼欐嫹瀹為敓鏂ゆ嫹
+	 * @throws ParseException 
+	 * @throws SQLException 
 	 */
-	public void update(ActivityMessage p) {
+	public void update(ActivityMessage p) throws SQLException, ParseException {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		db.execSQL("update t_ActivityMessage set isdate = ?, name = ? , title = ? , stime = ?, etime = ? where id = ? ",
-				new Object[] {p.getIsDate(),  p.getName(), p.getTitle(), 
+		db.execSQL("update t_ActivityMessage set isdate = ?, name = ? , title = ? ,body = ? ,stime = ?, etime = ? where id = ? ",
+				new Object[] {p.getIsDate(),  p.getName(), p.getTitle(),p.getBody(), 
 					p.getStartTime(), p.getEndTime() });
 	}
 
@@ -59,18 +64,20 @@ public class DBService {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cs = db.rawQuery("select * from t_ActivityMessage where title = ? ",
 				new String[] { String.valueOf(title) });
+		ActivityMessage p = new ActivityMessage();
+		//可能出现标题相同的事件
 		if (cs.moveToNext()) {
-			ActivityMessage p = new ActivityMessage();
+			
 			p.setIsDate(cs.getInt(cs.getColumnIndex("isdate")));
 			p.setName(cs.getString(cs.getColumnIndex("name")));
 			p.setTitle(cs.getString(cs.getColumnIndex("title")));
+			p.setBody(cs.getString(cs.getColumnIndex("body")));
 			p.setStartTime(cs.getString(cs.getColumnIndex("stime")));
 			p.setEndTime(cs.getString(cs.getColumnIndex("etime")));
-			cs.close();
-			return p;
+			
 		}
-
-		return null;
+		cs.close();
+		return p;
 	}
 	
 	/**
@@ -80,7 +87,7 @@ public class DBService {
 	 *            閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
 	 * @return 閿熸枻鎷烽敓鏂ゆ嫹鍊奸敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻妭锝忔嫹閿熸触杩斾紮鎷烽敓鐭紮鎷峰疄閿熸枻鎷烽敓鏂ゆ嫹铓嶇シ閿熻娇锟絬ll
 	 */
-	public ActivityMessage findByName(String name) {
+	public List<ActivityMessage> findByName(String name) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cs = db.rawQuery("select * from t_ActivityMessage where name = ? ",
 				new String[] { name });
@@ -89,14 +96,13 @@ public class DBService {
 			p.setIsDate(cs.getInt(cs.getColumnIndex("isdate")));
 			p.setName(cs.getString(cs.getColumnIndex("name")));
 			p.setTitle(cs.getString(cs.getColumnIndex("title")));
+			p.setBody(cs.getString(cs.getColumnIndex("body")));
 			p.setStartTime(cs.getString(cs.getColumnIndex("stime")));
 			p.setEndTime(cs.getString(cs.getColumnIndex("etime")));
-			
-			cs.close();
-			return p;
+			LAM.add(p);
 		}
-		
-		return null;
+		cs.close();
+		return LAM;
 	}
 
 	/**

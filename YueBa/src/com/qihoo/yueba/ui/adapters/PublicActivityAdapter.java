@@ -1,6 +1,7 @@
 
 package com.qihoo.yueba.ui.adapters;
 
+import java.text.ParseException;
 import java.util.List;
 
 import android.content.Context;
@@ -111,7 +112,12 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
                 // author img
                 TextView authorName = (TextView) convertView
                         .findViewById(R.id.mixed_feed_authorname);
-                authorName.setText(message.getStartTime() + " -- " + message.getEndTime());
+                try {
+					authorName.setText(message.getStartTime() + " -- " + message.getEndTime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
                 // big circle
                 ImageView big = (ImageView) convertView.findViewById(R.id.moment_bigdot);
