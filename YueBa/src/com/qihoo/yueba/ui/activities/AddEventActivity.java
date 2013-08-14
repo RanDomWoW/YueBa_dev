@@ -86,13 +86,8 @@ public class AddEventActivity extends Activity {
 				
 				//event_title.setText(p.getTitle());
 				
-				try {
-					start_time.setText("已设置起始时间为:"+sdf.format(p.getStartTime()));
-					end_time.setText("已设置终止时间为:"+sdf.format(p.getEndTime()));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				start_time.setText("已设置起始时间为:"+sdf.format(p.getStartTime()));
+				end_time.setText("已设置终止时间为:"+sdf.format(p.getEndTime()));
 				
 				//event_body.setText(p.getBody());
 				flag=1;
@@ -273,7 +268,7 @@ public class AddEventActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				//设置用户名称
-				p.setName("RanDom");
+				p.setName("tangwentao");
 				if(event_title.getText()!=null)
 				p.setTitle(event_title.getText().toString());
 				if(event_body.getText()!=null)

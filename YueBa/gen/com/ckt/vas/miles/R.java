@@ -785,7 +785,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.ckt.vas.miles:scrollBarPanel
+          @attr name android:scrollBarPanel
         */
         public static final int ExtendedListView_scrollBarPanel = 0;
         /**
@@ -795,7 +795,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.ckt.vas.miles:scrollBarPanelInAnimation
+          @attr name android:scrollBarPanelInAnimation
         */
         public static final int ExtendedListView_scrollBarPanelInAnimation = 1;
         /**
@@ -805,7 +805,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.ckt.vas.miles:scrollBarPanelOutAnimation
+          @attr name android:scrollBarPanelOutAnimation
         */
         public static final int ExtendedListView_scrollBarPanelOutAnimation = 2;
         /** Attributes that can be used with a RoundedCornersImage.
@@ -834,7 +834,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.ckt.vas.miles:cornerRadius
+          @attr name android:cornerRadius
         */
         public static final int RoundedCornersImage_cornerRadius = 0;
     };

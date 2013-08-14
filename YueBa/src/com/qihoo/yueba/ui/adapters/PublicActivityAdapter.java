@@ -2,6 +2,7 @@
 package com.qihoo.yueba.ui.adapters;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.content.Context;
@@ -27,7 +28,7 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
     protected static final String ACTION = "com.qihoo.psec.startactivity"; 
 
     private PublicActivity pa;
-    
+    private SimpleDateFormat formatter;
     private Context context;
 
     public static final String TEXT_FORMAT = "<font color='#1479ad'><b>%s</b></font>";
@@ -110,12 +111,8 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
                 // author img
                 TextView authorName = (TextView) convertView
                         .findViewById(R.id.mixed_feed_authorname);
-                try {
-					authorName.setText(message.getStartTime() + " -- " + message.getEndTime());
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+        		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");   
+                authorName.setText(formatter.format(message.getStartTime()) + " -- " + formatter.format(message.getEndTime()));
 
                 // big circle
                 ImageView big = (ImageView) convertView.findViewById(R.id.moment_bigdot);

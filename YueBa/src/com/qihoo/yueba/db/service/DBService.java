@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.qihoo.yueba.dto.ActivityMessage;
 
@@ -90,18 +91,21 @@ public class DBService {
 	public List<ActivityMessage> findByName(String name) {
 		List<ActivityMessage> LAM = new ArrayList<ActivityMessage>();
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		ActivityMessage p;
 		Cursor cs = db.rawQuery("select * from t_ActivityMessage where name = ? ",
 				new String[] { name });
-		if (cs.moveToNext()) {
-			ActivityMessage p = new ActivityMessage();
+		while (cs.moveToNext()) {
+			p = new ActivityMessage();
 			p.setIsDate(cs.getInt(cs.getColumnIndex("isdate")));
 			p.setName(cs.getString(cs.getColumnIndex("name")));
 			p.setTitle(cs.getString(cs.getColumnIndex("title")));
 			p.setBody(cs.getString(cs.getColumnIndex("body")));
 			p.setStartTime(cs.getString(cs.getColumnIndex("stime")));
 			p.setEndTime(cs.getString(cs.getColumnIndex("etime")));
+			
 			LAM.add(p);
 		}
+		Log.d("ab", Integer.toString(LAM.size()));
 		cs.close();
 		return LAM;
 	}

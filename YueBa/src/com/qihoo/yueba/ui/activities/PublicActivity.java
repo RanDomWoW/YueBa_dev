@@ -53,6 +53,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 	private RelativeLayout overlayView;
 	SlidingMenu mSlidingMenu;
 	Handler mHandler = new Handler();
+	private SimpleDateFormat formatter;
 	private ExtendedListView dataListView;
 	private com.qihoo.yueba.ui.adapters.Desktop mDesktop;
 	// Tool bar buttons...
@@ -73,17 +74,18 @@ public class PublicActivity extends Activity implements OnTouchListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Date currentTime = new Date();   
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");   
 		String dateString = formatter.format(currentTime);   
 		
 	
 		db = new DBService(PublicActivity.this);
 		Log.d("DB", "table " + db.getTotalCounts());
-		if (db.getTotalCounts() < 3) {
+		while (db.getTotalCounts() < 5) {
 			Log.d("DB", "new");
 			m = new ActivityMessage();
 			m.setTitle("Add here...");
 			m.setName("tangwentao");
+			m.setBody("Add there...");
 			m.setIsDate(0);
 			m.setStartTime(dateString);
 			m.setEndTime(dateString);
@@ -96,9 +98,9 @@ public class PublicActivity extends Activity implements OnTouchListener,
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			
 		}
-		
 		mDesktop = new Desktop(this);
 		mSlidingMenu = new SlidingMenu(this);
 		setContentView(mSlidingMenu);
@@ -247,7 +249,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 
 	private void initMessages() throws ParseException {
 		messages.clear();
-		messages.add(new ActivityMessage());
+		messages=db.findByName("tangwentao");
 		// data
 		// text
 //		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "鍟ヤ篃娌″共",
@@ -260,23 +262,24 @@ public class PublicActivity extends Activity implements OnTouchListener,
 //				"meisssss", "123", "123", 1333183510605l));
 //		
 		Log.d("DB", "find");
+		//Log.d("DB", "find1 "+db.findByName("tangwentao").get(3).getEndTime());
 		int size =  db.findByName("tangwentao").size();
-		Log.d("DB", "Size: " + size);
+//		Log.d("DB", "Size: " + size);
 		for (int i = 0; i < size; i ++) {
 			Log.d("DB", "AM: " + db.findByName("tangwentao").get(i).getIsDate() + " " + db.findByName("tangwentao").get(i).getName()  + " " + 
 					db.findByName("tangwentao").get(i).getTitle()  + " " + db.findByName("tangwentao").get(i).getBody()  + " " +
-					db.findByName("tangwentao").get(i).getStartTime().toString()  + " " + db.findByName("tangwentao").get(i).getEndTime().toString());
-			ActivityMessage am = db.findByName("tangwentao").get(i);
-			messages.add(new ActivityMessage(am.getIsDate(), am.getName(), am.getTitle(), am.getBody(), am.getStartTime().toString(), am.getEndTime().toString()));
-			Log.d("DB", "AM: " + am.getIsDate() + " " + am.getName()  + " " + 
-					am.getTitle()  + " " + am.getBody()  + " " + am.getStartTime().toString()  + " " + am.getEndTime().toString());
+					formatter.format(db.findByName("tangwentao").get(i).getStartTime())  + " " + formatter.format(db.findByName("tangwentao").get(i).getEndTime()));
+//			ActivityMessage am = db.findByName("tangwentao").get(i);
+//			messages.add(new ActivityMessage(am.getIsDate(), am.getName(), am.getTitle(), am.getBody(), am.getStartTime().toString(), am.getEndTime().toString()));
+//			Log.d("DB", "AM: " + am.getIsDate() + " " + am.getName()  + " " + 
+//					am.getTitle()  + " " + am.getBody()  + " " + am.getStartTime().toString()  + " " + am.getEndTime().toString());
 		}
-		List<ActivityMessage> msgs = db.findByName("tangwentao");
-		if (!msgs.isEmpty()) {
-			
-			
-		} 
-		Log.d("DB", "size" + msgs.get(0).getName());
+//		List<ActivityMessage> msgs = db.findByName("tangwentao");
+//		if (!msgs.isEmpty()) {
+//			
+//			
+//		} 
+		//Log.d("DB", "size" + msgs.get(0).getName());
 
 		//messages.add(0, new ActivityMessage());
 

@@ -19,7 +19,7 @@ public class ActivityMessage {
 	private String body=null;
 	//empty used for loading header
 	private long realTime;
-	//private Date realDate=new Date();
+	private Date tempDate=new Date();
 	private SimpleDateFormat sdf;
 	private int isDate;
 
@@ -57,11 +57,18 @@ public class ActivityMessage {
 	public void setBody(String b) {
 		 this.body = b;
 	}
-	public Date getStartTime() throws ParseException {
+	public Date getStartTime()  {
 		if(this.startTime!=null)
-			return sdf.parse(this.startTime);
+			
+			try {
+				tempDate=sdf.parse(this.startTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else tempDate=null;
+		return tempDate;
 		
-		else return null;
 
 	}
 	public void setStartTime(String st) {
@@ -76,11 +83,16 @@ public class ActivityMessage {
 		}
 		}
 	}
-	public Date getEndTime() throws ParseException {
+	public Date getEndTime() {
 		if(this.endTime!=null)
-			return sdf.parse(this.endTime);
-		
-		else return null;
+			try {
+				tempDate=sdf.parse(this.endTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else tempDate=null;
+		return tempDate;
 
 	}
 	public void setEndTime(String et) {
