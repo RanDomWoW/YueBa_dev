@@ -1,7 +1,9 @@
 package com.qihoo.yueba.ui.activities;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -12,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -32,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ckt.vas.miles.R;
+import com.qihoo.yueba.db.service.DBService;
 import com.qihoo.yueba.dto.ActivityMessage;
 import com.qihoo.yueba.ui.adapters.Desktop;
 import com.qihoo.yueba.ui.adapters.PublicActivityAdapter;
@@ -62,10 +66,39 @@ public class PublicActivity extends Activity implements OnTouchListener,
 	protected static final String ACTION = "com.qihoo.psec.startactivity";
 	private MyRecv receiver;
 
+	DBService db;
+	ActivityMessage m;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		Date currentTime = new Date();   
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+		String dateString = formatter.format(currentTime);   
+		
+	
+		db = new DBService(PublicActivity.this);
+		Log.d("DB", "table " + db.getTotalCounts());
+		if (db.getTotalCounts() < 3) {
+			Log.d("DB", "new");
+			m = new ActivityMessage();
+			m.setTitle("Add here...");
+			m.setName("tangwentao");
+			m.setIsDate(0);
+			m.setStartTime(dateString);
+			m.setEndTime(dateString);
+			try {
+				db.save(m);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		mDesktop = new Desktop(this);
 		mSlidingMenu = new SlidingMenu(this);
 		setContentView(mSlidingMenu);
@@ -107,7 +140,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		composerButtonsShowHideButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-					Toast.makeText(PublicActivity.this, "施工ing...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(PublicActivity.this, "鏂藉伐ing...", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -139,7 +172,12 @@ public class PublicActivity extends Activity implements OnTouchListener,
 
 		//
 		dataListView = (ExtendedListView) findViewById(R.id.list_view);
-		setAdapterForThis();
+		try {
+			setAdapterForThis();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// dataListView.setCacheColorHint(Color.TRANSPARENT);
 		dataListView.setOnPositionChangedListener(this);
 		clockLayout = (FrameLayout) findViewById(R.id.clock);
@@ -165,7 +203,12 @@ public class PublicActivity extends Activity implements OnTouchListener,
 
     @Override 
     public void onStart() {
-        setAdapterForThis();
+        try {
+			setAdapterForThis();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	super.onStart();
     }
 	
@@ -202,25 +245,47 @@ public class PublicActivity extends Activity implements OnTouchListener,
 
 	private List<ActivityMessage> messages = new ArrayList<ActivityMessage>();
 
-	private void initMessages() {
+	private void initMessages() throws ParseException {
 		messages.clear();
 		messages.add(new ActivityMessage());
 		// data
 		// text
-//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "啥也没干",
+//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "鍟ヤ篃娌″共",
 //				"meisssss", "123", "123", 1333153510605l));
-//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "啥也没干",
+//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "鍟ヤ篃娌″共",
 //				"meisssss", "123", "123", 1333163510605l));
-//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "啥也没干",
+//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "鍟ヤ篃娌″共",
 //				"meisssss", "123", "123", 1333173510605l));
-//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "啥也没干",
+//		messages.add(new ActivityMessage(R.drawable.gauss0, "Gauss", "鍟ヤ篃娌″共",
 //				"meisssss", "123", "123", 1333183510605l));
 //		
+		Log.d("DB", "find");
+		int size =  db.findByName("tangwentao").size();
+		Log.d("DB", "Size: " + size);
+		for (int i = 0; i < size; i ++) {
+			Log.d("DB", "AM: " + db.findByName("tangwentao").get(i).getIsDate() + " " + db.findByName("tangwentao").get(i).getName()  + " " + 
+					db.findByName("tangwentao").get(i).getTitle()  + " " + db.findByName("tangwentao").get(i).getBody()  + " " +
+					db.findByName("tangwentao").get(i).getStartTime().toString()  + " " + db.findByName("tangwentao").get(i).getEndTime().toString());
+			ActivityMessage am = db.findByName("tangwentao").get(i);
+			messages.add(new ActivityMessage(am.getIsDate(), am.getName(), am.getTitle(), am.getBody(), am.getStartTime().toString(), am.getEndTime().toString()));
+			Log.d("DB", "AM: " + am.getIsDate() + " " + am.getName()  + " " + 
+					am.getTitle()  + " " + am.getBody()  + " " + am.getStartTime().toString()  + " " + am.getEndTime().toString());
+		}
+		List<ActivityMessage> msgs = db.findByName("tangwentao");
+		if (!msgs.isEmpty()) {
+			
+			
+		} 
+		Log.d("DB", "size" + msgs.get(0).getName());
+
+		//messages.add(0, new ActivityMessage());
+
+		
 	}
 
 	PublicActivityAdapter chatHistoryAdapter;
 
-	private void setAdapterForThis() {
+	private void setAdapterForThis() throws ParseException {
 		initMessages();
 		chatHistoryAdapter = new PublicActivityAdapter(this, messages);
 		dataListView.setAdapter(chatHistoryAdapter);
@@ -252,42 +317,42 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		float[] timef = computMinAndHour(min, hour);
 		System.out.println("min===" + timef[0] + " hour===" + timef[1]);
 		// AnimationSet as = new AnimationSet(true);
-		// 创建RotateAnimation对象
-		// 0--图片从哪�?��旋转
-		// 360--图片旋转多少�?
-		// Animation.RELATIVE_TO_PARENT, 0f,// 定义图片旋转X轴的类型和坐�?
-		// Animation.RELATIVE_TO_PARENT, 0f);// 定义图片旋转Y轴的类型和坐�?
+		// 鍒涘缓RotateAnimation瀵硅薄
+		// 0--鍥剧墖浠庡摢锟�锟斤拷鏃嬭浆
+		// 360--鍥剧墖鏃嬭浆澶氬皯锟�
+		// Animation.RELATIVE_TO_PARENT, 0f,// 瀹氫箟鍥剧墖鏃嬭浆X杞寸殑绫诲瀷鍜屽潗锟�
+		// Animation.RELATIVE_TO_PARENT, 0f);// 瀹氫箟鍥剧墖鏃嬭浆Y杞寸殑绫诲瀷鍜屽潗锟�
 		RotateAnimation ra = new RotateAnimation(lastTime[0], timef[0],
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 		ra.setFillAfter(true);
 		ra.setFillBefore(true);
-		// 设置动画的执行时�?
+		// 璁剧疆鍔ㄧ敾鐨勬墽琛屾椂锟�
 		ra.setDuration(800);
-		// 将RotateAnimation对象添加到AnimationSet
+		// 灏哛otateAnimation瀵硅薄娣诲姞鍒癆nimationSet
 		// as.addAnimation(ra);
-		// 将动画使用到ImageView
+		// 灏嗗姩鐢讳娇鐢ㄥ埌ImageView
 		rtnAni[0] = ra;
 
 		lastTime[0] = timef[0];
 
 		// AnimationSet as2 = new AnimationSet(true);
-		// 创建RotateAnimation对象
-		// 0--图片从哪�?��旋转
-		// 360--图片旋转多少�?
-		// Animation.RELATIVE_TO_PARENT, 0f,// 定义图片旋转X轴的类型和坐�?
-		// Animation.RELATIVE_TO_PARENT, 0f);// 定义图片旋转Y轴的类型和坐�?
+		// 鍒涘缓RotateAnimation瀵硅薄
+		// 0--鍥剧墖浠庡摢锟�锟斤拷鏃嬭浆
+		// 360--鍥剧墖鏃嬭浆澶氬皯锟�
+		// Animation.RELATIVE_TO_PARENT, 0f,// 瀹氫箟鍥剧墖鏃嬭浆X杞寸殑绫诲瀷鍜屽潗锟�
+		// Animation.RELATIVE_TO_PARENT, 0f);// 瀹氫箟鍥剧墖鏃嬭浆Y杞寸殑绫诲瀷鍜屽潗锟�
 		RotateAnimation ra2 = new RotateAnimation(lastTime[1], timef[1],
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 
-		// 设置动画的执行时�?
+		// 璁剧疆鍔ㄧ敾鐨勬墽琛屾椂锟�
 		ra2.setFillAfter(true);
 		ra2.setFillBefore(true);
 		ra2.setDuration(800);
-		// 将RotateAnimation对象添加到AnimationSet
+		// 灏哛otateAnimation瀵硅薄娣诲姞鍒癆nimationSet
 		// as2.addAnimation(ra2);
-		// 将动画使用到ImageView
+		// 灏嗗姩鐢讳娇鐢ㄥ埌ImageView
 		rtnAni[1] = ra2;
 		lastTime[1] = timef[1];
 		return rtnAni;
@@ -304,7 +369,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		System.out.println("layout=======padding top========"
 				+ scrollBarPanel.getPaddingTop());
 		TextView datestr = ((TextView) findViewById(R.id.clock_digital_date));
-		datestr.setText("上午");
+		datestr.setText("涓婂崍");
 		ActivityMessage msg = messages.get(firstVisiblePosition);
 
 		System.out.println("firstVisiblePosition============="
@@ -316,7 +381,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		String tmpstr = "";
 		if (hour > 12) {
 			hour = hour - 12;
-			datestr.setText("下午");
+			datestr.setText("涓嬪崍");
 			tmpstr += " ";
 		} else if (0 < hour && hour < 10) {
 
@@ -391,7 +456,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if(flag==0){
-			Toast.makeText(PublicActivity.this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+			Toast.makeText(PublicActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
 			flag++;
 			}
 			else {
@@ -413,8 +478,8 @@ public class PublicActivity extends Activity implements OnTouchListener,
 
 //	private void dialog() {
 //		AlertDialog.Builder builder = new Builder(PublicActivity.this);
-//		builder.setMessage("您确定要�?���?");
-//		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//		builder.setMessage("鎮ㄧ‘瀹氳锟�锟斤拷锟�");
+//		builder.setPositiveButton("纭畾", new DialogInterface.OnClickListener() {
 //
 //			public void onClick(DialogInterface dialog, int which) {
 //				dialog.dismiss();
@@ -423,7 +488,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 //				System.exit(0);
 //			}
 //		});
-//		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//		builder.setNegativeButton("鍙栨秷", new DialogInterface.OnClickListener() {
 //
 //			public void onClick(DialogInterface dialog, int which) {
 //				dialog.cancel();

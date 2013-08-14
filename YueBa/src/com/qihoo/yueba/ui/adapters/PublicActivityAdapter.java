@@ -32,13 +32,12 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
 
     public static final String TEXT_FORMAT = "<font color='#1479ad'><b>%s</b></font>";
 
-    public static final String TEXT_ADDFRD_FORMAT_WITHFROM = "<font color='#1479ad'>%s</font> 与 <font color='#1479ad'>%s</font> 成为了好友";
-
-    public static final String TEXT_ADDFRD_NOFROM = "与 <font color='#1479ad'><b>%s</b></font> 成为了好友";
+//    public static final String TEXT_ADDFRD_FORMAT_WITHFROM = "<font color='#1479ad'>%s</font> 涓�<font color='#1479ad'>%s</font> 鎴愪负浜嗗ソ鍙�;
+//
+//    public static final String TEXT_ADDFRD_NOFROM = "涓�<font color='#1479ad'><b>%s</b></font> 鎴愪负浜嗗ソ鍙�;
 
     private List<ActivityMessage> msgs;
     
-
 
     public PublicActivityAdapter(Context context, List<ActivityMessage> messages) {
         super();
@@ -71,7 +70,6 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
             holder = new ViewHolder();
 
             if (position == 0) {
-
             	holder.flag = position;
                 convertView = LayoutInflater.from(context).inflate(R.layout.mixed_feed_cover_row,
                         null);
@@ -150,12 +148,12 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
 
                     thought_main.setText(spt);*/
                     thought_main.setText(message.getTitle());
-                    thought_main.setClickable(true); //设置tv为可点击。
+                    thought_main.setClickable(true); //璁剧疆tv涓哄彲鐐瑰嚮銆�
                     thought_main.setOnClickListener(new OnClickListener(){   
                         @Override
                         public void onClick(View v) {
                             // TODO Auto-generated method stub
-                            //显示"TextView is clicked"
+                            //"TextView is clicked"
                         	//tv.setBackgroundColor(R.drawable.m_bar);
                         	Intent intent = new Intent(ACTION);
                         	TextView tv = (TextView)v;
@@ -220,7 +218,7 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
 //                    RotateAnimation ra = new RotateAnimation(0f, 150f, Animation.RELATIVE_TO_SELF,
 //                            0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 //                    ra.setFillAfter(true);
-//                    // 设置动画的执行时间
+//                    // 璁剧疆鍔ㄧ敾鐨勬墽琛屾椂闂�
 //                    ra.setDuration(10000);
 //                    
 //                    friendphoto.setAnimation(ra);

@@ -35,7 +35,7 @@ public class ActivityMessage {
 	 * @param storeName
 	 * @param body
 	 */
-	public ActivityMessage(int isDate, String name, String title,String body, String stime, String etime) {
+	public ActivityMessage(int isDate, String name, String title, String body, String stime, String etime) {
 		this.type = 1;
 		this.isDate = isDate;
 		this.name = name;

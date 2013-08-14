@@ -16,16 +16,16 @@ public class DBService {
 	@SuppressWarnings("unused")
 	private Context context;
 	private DBOpenHelper dbHelper;
-	private List<ActivityMessage> LAM = new ArrayList<ActivityMessage>();
+	
 	public DBService(Context context) {
 		dbHelper = new DBOpenHelper(context);
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閿熸枻鎷烽敓鑺ュ崟閿熸枻鎷烽敓鐭紮鎷烽敓鏂ゆ嫹鎭�
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柨鐔告灮閹风兘鏁撻懞銉ュ礋闁跨喐鏋婚幏鐑芥晸閻偂绱幏鐑芥晸閺傘倖瀚归幁锟�
 	 * 
 	 * @param p
-	 *            閿熺煫浼欐嫹瀹為敓鏂ゆ嫹
+	 *            闁跨喓鐓导娆愬鐎圭偤鏁撻弬銈嗗
 	 * @throws ParseException 
 	 * @throws SQLException 
 	 */
@@ -39,10 +39,10 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷锋伅
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喓鐓导娆愬闁跨喐鏋婚幏閿嬩紖
 	 * 
 	 * @param p
-	 *            閿熺煫浼欐嫹瀹為敓鏂ゆ嫹
+	 *            闁跨喓鐓导娆愬鐎圭偤鏁撻弬銈嗗
 	 * @throws ParseException 
 	 * @throws SQLException 
 	 */
@@ -54,18 +54,18 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閫氶敓鏂ゆ嫹閿熺煫浼欐嫹id閿熸枻鎷疯閿熺煫浼欐嫹閿熸枻鎷锋伅
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柅姘舵晸閺傘倖瀚归柨鐔虹叓娴兼瑦瀚筰d闁跨喐鏋婚幏鐤嚄闁跨喓鐓导娆愬闁跨喐鏋婚幏閿嬩紖
 	 * 
 	 * @param id
-	 *            閿熺煫浼欐嫹id
-	 * @return 閿熸枻鎷烽敓鏂ゆ嫹鍊奸敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻妭锝忔嫹閿熸触杩斾紮鎷烽敓鐭紮鎷峰疄閿熸枻鎷烽敓鏂ゆ嫹铓嶇シ閿熻娇锟絬ll
+	 *            闁跨喓鐓导娆愬id
+	 * @return 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归崐濂告晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喕濡敐蹇斿闁跨喐瑙︽潻鏂剧串閹风兘鏁撻惌顐＄串閹峰嘲鐤勯柨鐔告灮閹风兘鏁撻弬銈嗗閾撳秶銈烽柨鐔诲▏閿熺惮ll
 	 */
 	public ActivityMessage findByTitle(String title) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cs = db.rawQuery("select * from t_ActivityMessage where title = ? ",
 				new String[] { String.valueOf(title) });
 		ActivityMessage p = new ActivityMessage();
-		//可能出现标题相同的事件
+		//鍙兘鍑虹幇鏍囬鐩稿悓鐨勪簨浠�
 		if (cs.moveToNext()) {
 			
 			p.setIsDate(cs.getInt(cs.getColumnIndex("isdate")));
@@ -81,13 +81,14 @@ public class DBService {
 	}
 	
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閫氶敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺獤锟芥嫹娌￠敓鏂ゆ嫹閿熻緝?
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柅姘舵晸閺傘倖瀚归柨鐔虹叓娴兼瑦瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喓鐛ら敓鑺ュ濞岋繝鏁撻弬銈嗗闁跨喕绶�
 	 * 
 	 * @param name
-	 *            閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
-	 * @return 閿熸枻鎷烽敓鏂ゆ嫹鍊奸敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻妭锝忔嫹閿熸触杩斾紮鎷烽敓鐭紮鎷峰疄閿熸枻鎷烽敓鏂ゆ嫹铓嶇シ閿熻娇锟絬ll
+	 *            闁跨喓鐓导娆愬闁跨喐鏋婚幏鐑芥晸閺傘倖瀚�
+	 * @return 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归崐濂告晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喕濡敐蹇斿闁跨喐瑙︽潻鏂剧串閹风兘鏁撻惌顐＄串閹峰嘲鐤勯柨鐔告灮閹风兘鏁撻弬銈嗗閾撳秶銈烽柨鐔诲▏閿熺惮ll
 	 */
 	public List<ActivityMessage> findByName(String name) {
+		List<ActivityMessage> LAM = new ArrayList<ActivityMessage>();
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cs = db.rawQuery("select * from t_ActivityMessage where name = ? ",
 				new String[] { name });
@@ -106,10 +107,10 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閫氶敓鏂ゆ嫹閿熺煫浼欐嫹id鍒犻敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷锋伅
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柅姘舵晸閺傘倖瀚归柨鐔虹叓娴兼瑦瀚筰d閸掔娀鏁撻弬銈嗗闁跨喓鐓导娆愬闁跨喐鏋婚幏閿嬩紖
 	 * 
 	 * @param ids
-	 *            閿熺煫浼欐嫹id
+	 *            闁跨喓鐓导娆愬id
 	 */
 	public void delete(Integer... ids) {
 		if (ids.length > 0) {
@@ -125,13 +126,13 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�閫氶敓鏂ゆ嫹閿熸彮绛规嫹閿熸枻鎷锋嚳閿熺獤锟芥嫹娌￠敓鏂ゆ嫹鏂滈敓?
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟介柅姘舵晸閺傘倖瀚归柨鐔稿疆缁涜瀚归柨鐔告灮閹烽攱鍤抽柨鐔虹崵閿熻姤瀚瑰▽锟犳晸閺傘倖瀚归弬婊堟晸?
 	 * 
 	 * @param startNum
-	 *            閿熸枻鎷峰閿熸枻鎷烽敓鏂ゆ嫹鍊�
+	 *            闁跨喐鏋婚幏宄邦瀶闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归崐锟�
 	 * @param perNum
-	 *            姣忛〉閿熸枻鎷风ず閿熸枻鎷烽敓鏂ゆ嫹鐩�
-	 * @return 閿熸枻鎷烽敓鏂ゆ嫹鍊奸敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹閿熷彨鎲嬫嫹閿熸枻鎷锋伅
+	 *            濮ｅ繘銆夐柨鐔告灮閹烽銇氶柨鐔告灮閹风兘鏁撻弬銈嗗閻╋拷
+	 * @return 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归崐濂告晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喓鐓导娆愬闁跨喎褰ㄩ幉瀣闁跨喐鏋婚幏閿嬩紖
 	 */
 	public List<ActivityMessage> getPersons(int startNum, int perNum) {
 		List<ActivityMessage> lists = new ArrayList<ActivityMessage>();
@@ -154,9 +155,9 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�缁熼敓鏂ゆ嫹閿熸枻鎷疯彉閿熸枻鎷烽敓鏂ゆ嫹閿熸嵎纰夋嫹閿熸枻鎷风洰
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟界紒鐔兼晸閺傘倖瀚归柨鐔告灮閹风柉褰夐柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐宓庣喊澶嬪闁跨喐鏋婚幏椋庢窗
 	 * 
-	 * @return 閿熸枻鎷烽敓鏂ゆ嫹鍊奸敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷疯幐閿熸枻鎷烽敓鏂ゆ嫹閿�
+	 * @return 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归崐濂告晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏鐤箰闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨锟�
 	 */
 	public long getTotalCounts() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -168,36 +169,36 @@ public class DBService {
 	}
 
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�浣块敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽攲閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻緝锟芥嫹姣嶉敓鏂ゆ嫹铏忛敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺殕杈炬嫹娌￠敓闃讹拷鎷烽敓琛楅潻鎷烽敓鏂ゆ嫹閿熺瓔鍒扮洰閿熸枻鎷烽敓鐭紮鎷�
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟芥担鍧楁晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥敳闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喕绶濋敓鑺ュ濮ｅ秹鏁撻弬銈嗗閾忓繘鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔烘畷鏉堢偓瀚瑰▽锟犳晸闂冭鎷烽幏鐑芥晸鐞涙娼婚幏鐑芥晸閺傘倖瀚归柨鐔虹摂閸掓壆娲伴柨鐔告灮閹风兘鏁撻惌顐＄串閹凤拷
 	 * 
 	 * @param id
-	 *            婧愰敓鐭紮鎷穒d
+	 *            濠ф劙鏁撻惌顐＄串閹风d
 	 * @param amount
-	 *            杞敓鏂ゆ嫹閿熸枻鎷烽敓?
+	 *            鏉烆剟鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥晸?
 	 * @param tid
-	 *            鐩敓鏂ゆ嫹閿熺煫浼欐嫹id
+	 *            閻╊噣鏁撻弬銈嗗闁跨喓鐓导娆愬id
 	 */
 //	public void transAmount(int id, float amount, int tid) {
 //		SQLiteDatabase db = dbHelper.getWritableDatabase();
-//		// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+//		// 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗
 //		db.beginTransaction();
 //		try {
 //			if (findById(id) != null && findById(tid) != null) {
 //				db.execSQL("update t_ActivityMessage set amount = amount - ? where id = ? ", new Object[] { amount, id });
 //				db.execSQL("update t_ActivityMessage set amount = amount + ? where id = ? ", new Object[] { amount, tid });
-//				// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鏌愭檼閿熸枻鎷烽敓琛�
+//				// 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗閺屾劖妾奸柨鐔告灮閹风兘鏁撶悰锟�
 //				db.setTransactionSuccessful();
 //			}
 //		} catch (SQLException e) {
 //		} finally {
-//			// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹娆犻敓缂寸櫢鎷烽敓鏂ゆ嫹蹇椾负閿熺即鐧告嫹鏃堕敓鏂ゆ嫹閿熸枻鎷烽敓缁炴唻鎷烽敓鏂ゆ嫹宄や紮鎷烽敓鏂ゆ嫹閿熸枻鎷蜂砍閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鑵旀瘬閿熸枻鎷烽敓鏂ゆ嫹鐧挃閿熸枻鎷烽敓?
+//			// 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥晸閺傘倖瀚瑰▎鐘绘晸缂傚娅㈤幏鐑芥晸閺傘倖瀚硅箛妞捐礋闁跨喓鍗抽惂鍛婂閺冨爼鏁撻弬銈嗗闁跨喐鏋婚幏鐑芥晸缂佺偞鍞婚幏鐑芥晸閺傘倖瀚瑰畡銈勭串閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏铚傜爫闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗閼垫梹鐦柨鐔告灮閹风兘鏁撻弬銈嗗閻ь偀鎸冮柨鐔告灮閹风兘鏁�
 //			db.endTransaction();
 //		}
 //	}
 	
 	/**
-	 * 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-	 *         閿熸埅鎲嬫嫹閿熸枻鎷疯彉閿熸枻鎷烽敓鐨�
+	 * 闁跨喐鏋婚幏鐑芥晸閺傘倖瀚归柨鐔告灮閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟�
+	 *         闁跨喐鍩呴幉瀣闁跨喐鏋婚幏鐤綁闁跨喐鏋婚幏鐑芥晸閻拷
 	 */
 	public void closeDB(){
 		dbHelper.close();
