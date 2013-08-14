@@ -130,7 +130,7 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
                 LinearLayout contentLayout = (LinearLayout) convertView
                         .findViewById(R.id.feed_post_body);
                 // Text
-                if (ActivityMessage.MESSAGE_TYPE_TEXT == type) {
+                if (ActivityMessage.MESSAGE_TYPE_TEXT == 1) {
                     big.setVisibility(View.GONE);
                     smal.setVisibility(View.VISIBLE);
                     View view = LayoutInflater.from(context).inflate(
@@ -165,69 +165,6 @@ public class PublicActivityAdapter<PiblicActivityAdapter> extends BaseAdapter {
                     contentLayout.addView(view);
 
                 }
-                // Img
-                /*
-                else if (ActivityMessage.MESSAGE_TYPE_IMG == type) {
-                    smal.setVisibility(View.GONE);
-                    big.setVisibility(View.VISIBLE);
-
-                    View view = LayoutInflater.from(context).inflate(R.layout.moment_photo_partial,
-                            null);
-                    feed_post_type.setImageResource(R.drawable.moment_icn_place);
-                    // photo
-                    ImageView photoView = (ImageView) view.findViewById(R.id.photo);
-                    photoView.setImageResource(message.getStoreimg());
-
-                    TextView comment = (TextView) view.findViewById(R.id.comment);
-                    String txtstr = String.format(TEXT_FORMAT, message.getAuthorName(),
-                            message.getStoreName());
-                    Spanned spt = Html.fromHtml(txtstr);
-                    comment.setText(spt);
-
-                    contentLayout.addView(view);
-                }
-                */
-/*
-                // Friend
-                else if (ActivityMessage.MESSAGE_TYPE_MKFRIENDS == type) {
-                    smal.setVisibility(View.GONE);
-                    big.setVisibility(View.VISIBLE);
-                    View view = LayoutInflater.from(context).inflate(
-                            R.layout.moment_people_partial, null);
-                    imgType.setImageResource(R.drawable.m_san);
-
-                    // mainView.setText("Gauss");
-                    // main
-                    TextView comment = (TextView) view.findViewById(R.id.people_body);
-                    String txtstr = String.format(TEXT_ADDFRD_FORMAT_WITHFROM,
-                            message.getAuthorName(), message.getBody());
-                    Spanned spt = Html.fromHtml(txtstr);
-                    comment.setText(spt);
-
-                    // count of commment
-                    TextView countcmt = (TextView) view.findViewById(R.id.comment_button_text);
-                    countcmt.setText("5");
-
-                    // friend photo
-                    ImageView friendphoto = (ImageView) view.findViewById(R.id.friendphoto);
-                    friendphoto.setImageResource(message.getStoreimg());
-//
-//                    RotateAnimation ra = new RotateAnimation(0f, 150f, Animation.RELATIVE_TO_SELF,
-//                            0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//                    ra.setFillAfter(true);
-//                    // 璁剧疆鍔ㄧ敾鐨勬墽琛屾椂闂�
-//                    ra.setDuration(10000);
-//                    
-//                    friendphoto.setAnimation(ra);
-
-                    contentLayout.addView(view);
-                }
-*/
-                else {
-                    smal.setVisibility(View.GONE);
-                    big.setVisibility(View.VISIBLE);
-                }
-
             }
             convertView.setTag(holder);
 

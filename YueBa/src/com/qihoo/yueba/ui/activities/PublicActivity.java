@@ -77,18 +77,24 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");   
 		String dateString = formatter.format(currentTime);   
 		
-	
 		db = new DBService(PublicActivity.this);
 		Log.d("DB", "table " + db.getTotalCounts());
-		while (db.getTotalCounts() < 5) {
+		int j = 0;
+		while (db.getTotalCounts() < 7) {
 			Log.d("DB", "new");
 			m = new ActivityMessage();
-			m.setTitle("Add here...");
+			m.setTitle("空闲时间： 8:00 至 11:00...");
 			m.setName("tangwentao");
 			m.setBody("Add there...");
 			m.setIsDate(0);
 			m.setStartTime(dateString);
 			m.setEndTime(dateString);
+			j ++;
+			if (j == 5) {
+				m.setName("Lei");
+			} else if (j == 6) {
+				m.setName("Bian");
+			}
 			try {
 				db.save(m);
 			} catch (SQLException e) {
@@ -98,9 +104,9 @@ public class PublicActivity extends Activity implements OnTouchListener,
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			
 		}
+
+		
 		mDesktop = new Desktop(this);
 		mSlidingMenu = new SlidingMenu(this);
 		setContentView(mSlidingMenu);
@@ -264,6 +270,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		Log.d("DB", "find");
 		//Log.d("DB", "find1 "+db.findByName("tangwentao").get(3).getEndTime());
 		int size =  db.findByName("tangwentao").size();
+		
 //		Log.d("DB", "Size: " + size);
 		for (int i = 0; i < size; i ++) {
 			Log.d("DB", "AM: " + db.findByName("tangwentao").get(i).getIsDate() + " " + db.findByName("tangwentao").get(i).getName()  + " " + 
@@ -372,7 +379,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		System.out.println("layout=======padding top========"
 				+ scrollBarPanel.getPaddingTop());
 		TextView datestr = ((TextView) findViewById(R.id.clock_digital_date));
-		datestr.setText("涓婂崍");
+		datestr.setText("上午");
 		ActivityMessage msg = messages.get(firstVisiblePosition);
 
 		System.out.println("firstVisiblePosition============="
@@ -384,7 +391,7 @@ public class PublicActivity extends Activity implements OnTouchListener,
 		String tmpstr = "";
 		if (hour > 12) {
 			hour = hour - 12;
-			datestr.setText("涓嬪崍");
+			datestr.setText("下午");
 			tmpstr += " ";
 		} else if (0 < hour && hour < 10) {
 

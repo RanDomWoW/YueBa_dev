@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.ckt.vas.miles.R;
 import com.qihoo.yueba.db.service.DBService;
 import com.qihoo.yueba.dto.ActivityMessage;
+import com.qihoo.yueba.ui.activities.TimeMergeActivity;
 
 public class TimeMergeActivityAdapter extends BaseAdapter {
     protected static final String TAG = "ChattingAdapter";
@@ -38,6 +39,7 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
 
     private static List<ActivityMessage> msgs;
 
+
     public TimeMergeActivityAdapter(Context context, List<ActivityMessage> messages) {
         super();
         this.context = context;
@@ -47,6 +49,7 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
 
     public TimeMergeActivityAdapter() {
 		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
@@ -228,7 +231,6 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
 				*/
 				
 				
-				
                 
                 for(int i=0; i<6;i++){
 					final ImageView iv = new ImageView(convertView.getContext());
@@ -246,11 +248,8 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
 
 							msgs.clear();
 							msgs.add(new ActivityMessage());
-//							msgs.add(new ActivityMessage( R.drawable.gauss0, "Gauss", "8:00至9:00", "空闲时间： 8:00至9:00","8:00", "9:00", 1333253510605l));
-//							msgs.add(new ActivityMessage( R.drawable.gauss0, "Gauss", "8:00至9:00", "空闲时间： 12:00至13:50",
-//					                "8:00", "9:00", 1333253510605l));
-//							msgs.add(new ActivityMessage( R.drawable.gauss0, "Gauss", "8:00至9:00", "空闲时间： 18:00至19:00",
-//					                "8:00", "9:00", 1333253510605l));
+							msgs.add(new ActivityMessage(0, "Bian", "空间时间 8:00 至 10：00", "", "8:00", "10:00" ));
+							
 							View vp = (View) v.getRootView();
 							RelativeLayout rl = (RelativeLayout) vp.findViewById(R.id.timemerge);
 							
@@ -310,7 +309,7 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
                 LinearLayout contentLayout = (LinearLayout) convertView
                         .findViewById(R.id.feed_post_body);
                 // Text
-                if (ActivityMessage.MESSAGE_TYPE_TEXT == type) {
+                if (ActivityMessage.MESSAGE_TYPE_TEXT == 1) {
                     big.setVisibility(View.GONE);
                     smal.setVisibility(View.VISIBLE);
                     View view = LayoutInflater.from(context).inflate(
@@ -345,11 +344,6 @@ public class TimeMergeActivityAdapter extends BaseAdapter {
 
                     contentLayout.addView(view);
 
-                }
-                
-                else {
-                    smal.setVisibility(View.GONE);
-                    big.setVisibility(View.VISIBLE);
                 }
 
             }

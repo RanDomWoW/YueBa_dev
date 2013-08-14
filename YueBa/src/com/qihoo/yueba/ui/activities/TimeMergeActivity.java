@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ckt.vas.miles.R;
+import com.qihoo.yueba.db.service.DBService;
 import com.qihoo.yueba.dto.ActivityMessage;
 import com.qihoo.yueba.ui.adapters.Desktop;
 import com.qihoo.yueba.ui.adapters.TimeMergeActivityAdapter;
@@ -59,10 +60,15 @@ public class TimeMergeActivity extends Activity implements OnTouchListener, OnPo
     private TextView timeshow;
     private com.qihoo.yueba.ui.adapters.Desktop mDesktop;
     SlidingMenu mSlidingMenu;
+    
+	DBService db;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+		db = new DBService(TimeMergeActivity.this);
 
         setContentView(R.layout.feed_activity3);
         
@@ -152,6 +158,18 @@ public class TimeMergeActivity extends Activity implements OnTouchListener, OnPo
 //                "8:00", "9:00", 1333253510605l));
 //    	messages.add(new ActivityMessage( R.drawable.gauss0, "Gauss", "8:00至9:00", "空闲时间： 18:00至19:00",
 //                "8:00", "9:00", 1333253510605l));
+    	
+		messages.clear();
+		messages.add(new ActivityMessage());
+		int i = 0;
+		int size = db.findByName("Bian").size();
+		for (i = 0; i < size; i ++) {
+			messages.add(db.findByName("Bian").get(i));
+		}
+//		size = db.findByName("Lei").size();
+//		for (i = 0; i < size; i ++) {
+//			messages.add(db.findByName("Lei").get(i));
+//		}
     }
 
     TimeMergeActivityAdapter chatHistoryAdapter;
